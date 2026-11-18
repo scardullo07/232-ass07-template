@@ -25,11 +25,11 @@ std::string AUTHOR_AUTHORSHIP = "I acknowledge that I have worked on this "
 bool Shape::operator<(const Shape &other) const
 {
     // TODO: compare area() of both shapes with <
-    return false;
+    return area() < other.area();
 }
 
 /// Constructor with a member initializer list.
-Circle::Circle(double newRadius)
+Circle::Circle(double newRadius) : radius(newRadius)
 {
     // TODO: move the initialization of 'radius' into an initializer list
 }
@@ -37,18 +37,17 @@ Circle::Circle(double newRadius)
 /// pi * radius * radius, use std::numbers::pi
 double Circle::area() const
 {
-    // TODO: implement
-    return 0.0;
+    return std::numbers::pi * radius * radius;
 }
 
 /// Return exactly "Circle".
 std::string Circle::name() const
 {
     // TODO: implement
-    return "";
+    return "Circle";
 }
 
-Square::Square(double newSide)
+Square::Square(double newSide) : side(newSide)
 {
     // TODO: initializer list
 }
@@ -57,17 +56,17 @@ Square::Square(double newSide)
 double Square::area() const
 {
     // TODO: implement
-    return 0.0;
+    return side * side;
 }
 
 /// Return exactly "Square".
 std::string Square::name() const
 {
     // TODO: implement
-    return "";
+    return "Square";
 }
 
-Rectangle::Rectangle(double newWidth, double newHeight)
+Rectangle::Rectangle(double newWidth, double newHeight) : width(newWidth), height(newHeight)
 {
     // TODO: initializer list
 }
@@ -76,14 +75,14 @@ Rectangle::Rectangle(double newWidth, double newHeight)
 double Rectangle::area() const
 {
     // TODO: implement
-    return 0.0;
+    return width * height;
 }
 
 /// Return exactly "Rectangle".
 std::string Rectangle::name() const
 {
     // TODO: implement
-    return "";
+    return "Rectangle";
 }
 
 // ============================================================
@@ -93,14 +92,16 @@ std::string Rectangle::name() const
 /// RAII: delete EVERY shape, then clear the list.
 ShapeList::~ShapeList()
 {
-    // TODO: implement
+    for (Shape * shape :data){
+        delete shape;
+    }
+    data.clear();
 }
 
 /// Append at the end. Return -1 if newShapePtr is nullptr, 0 on success.
 int ShapeList::addShape(Shape *newShapePtr)
 {
     // TODO: implement
-    return -1;
 }
 
 /// Delete the first shape and remove it from the list.
